@@ -221,7 +221,7 @@ const MasterFooter = ({
                         } else setIsOpen(true);
                       }}
                     >
-                      why we choose
+                      why choose us
                       <span className="according-menu"></span>
                     </h4>
                   </div>
@@ -237,13 +237,10 @@ const MasterFooter = ({
                           <a href="#">secure shopping</a>
                         </li>
                         <li>
-                          <a href="#">gallary</a>
+                          <a href="#">gallery</a>
                         </li>
                         <li>
                           <a href="#">affiliates</a>
-                        </li>
-                        <li>
-                          <a href="#">contacts</a>
                         </li>
                       </ul>
                     </div>
@@ -275,18 +272,15 @@ const MasterFooter = ({
                     <div className="footer-contant">
                       <ul className="contact-list">
                         <li>
-                          <i className="fa fa-map-marker"></i>Multikart Demo
-                          Store, Demo store India 345-659
+                          <i className="fa fa-map-marker"></i>Commerce Essentials Demo
+                          Store
                         </li>
                         <li>
-                          <i className="fa fa-phone"></i>Call Us: 123-456-7898
+                          <i className="fa fa-phone"></i>Call Us: +44 7975234316
                         </li>
                         <li>
                           <i className="fa fa-envelope-o"></i>Email Us:{" "}
-                          <a href="#">Support@Fiot.com</a>
-                        </li>
-                        <li>
-                          <i className="fa fa-fax"></i>Fax: 123456
+                          <a href="#">amit_knath@live.com</a>
                         </li>
                       </ul>
                     </div>

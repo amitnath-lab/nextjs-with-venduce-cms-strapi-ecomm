@@ -1,21 +1,21 @@
 import React from "react";
-import Banner from "./layouts/Fashion/Components/Banner";
-import CollectionBanner from "./layouts/Fashion/Components/Collection-Banner";
-import TopCollection from "../components/common/Collections/Collection3";
-import Parallax from "./layouts/Fashion/Components/Parallax";
-import SpecialProducts from "../components/common/Collections/TabCollection1";
-import ServiceLayout from "../components/common/Service/service1";
-import Blog from "../components/common/Blog/blog1";
-import Instagram from "../components/common/instagram/instagram1";
-import LogoBlock from "../components/common/logo-block";
-import HeaderOne from "../components/headers/header-one";
-import { withApollo } from "../helpers/apollo/apollo";
-import { Product4 } from "../services/script";
-import Paragraph from "../components/common/Paragraph";
-import ModalComponent from "../components/common/Modal";
+import Banner from "../../layouts/Fashion/Components/Banner";
+import CollectionBanner from "../../layouts/Fashion/Components/Collection-Banner";
+import TopCollection from "../../../components/common/Collections/Collection3";
+import Parallax from "../../layouts/Fashion/Components/Parallax";
+import SpecialProducts from "../../../components/common/Collections/TabCollection1";
+import ServiceLayout from "../../../components/common/Service/service1";
+import Blog from "../../../components/common/Blog/blog1";
+import Instagram from "../../../components/common/instagram/instagram1";
+import LogoBlock from "../../../components/common/logo-block";
+import HeaderOne from "../../../components/headers/header-one";
+import { withApollo } from "../../../helpers/apollo/apollo";
+import { Product4 } from "../../../services/script";
+import Paragraph from "../../../components/common/Paragraph";
+import ModalComponent from "../../../components/common/Modal";
 import Helmet from "react-helmet";
-import favicon from "../public/assets/images/favicon/1.png";
-import MasterFooter from "../components/footers/common/MasterFooter";
+import favicon from "../../../public/assets/images/favicon/1.png";
+import MasterFooter from "../../../components/footers/common/MasterFooter";
 
 const Fashion = () => {
   return (
@@ -68,7 +68,7 @@ const Fashion = () => {
         footerSection={"small-section border-section border-top-0"}
         belowSection={"section-b-space light-layout"}
         newLatter={true}
-        logoName={"ca_logo.jpg"}
+        logoName={"logo.png"}
       />
     </>
   );
