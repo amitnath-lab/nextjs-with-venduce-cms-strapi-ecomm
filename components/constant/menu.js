@@ -19,7 +19,7 @@ export const MENUITEMS = [
          },
          {
             title: 'Clothing', type: 'sub', children: [
-               { path: '/', title: 'Fashion1', type: 'link' },
+               { path: '/layouts/Fashion', title: 'Fashion1', type: 'link' },
                { path: '/layouts/Fashion2', title: 'Fashion2', type: 'link' },
                { path: '/layouts/Fashion3', title: 'Fashion3', type: 'link' },
                { path: '/layouts/Kids', title: 'Kids', type: 'link' },
