@@ -9,9 +9,8 @@ import {
   Form,
   Button,
 } from "reactstrap";
-import offerBanner from "../../public/assets/images/Offer-banner.png";
 
-const ModalComponent = () => {
+const ModalComponent = ({data}) => {
   const [modal, setModal] = useState(true);
 
   const toggle = () => setModal(!modal);
@@ -39,11 +38,11 @@ const ModalComponent = () => {
                 </Button>
                 <div className="offer-content">
                   <Media
-                    src={offerBanner}
+                    src={data.offerBanner}
                     className="img-fluid blur-up lazyload"
                     alt=""
                   />
-                  <h2>newsletter</h2>
+                  <h2>{data.offerContentH2}</h2>
                   <Form
                     action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda"
                     className="auth-form needs-validation"
@@ -66,7 +65,7 @@ const ModalComponent = () => {
                         className="btn btn-solid"
                         id="mc-submit"
                       >
-                        subscribe
+                        {data.subscribeBtnText}
                       </Button>
                     </div>
                   </Form>

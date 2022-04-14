@@ -11,6 +11,8 @@ import SettingProvider from "../helpers/theme-setting/SettingProvider";
 import { CompareContextProvider } from "../helpers/Compare/CompareContext";
 import { CurrencyContextProvider } from "../helpers/Currency/CurrencyContext";
 import Helmet from "react-helmet";
+import { ApolloProvider } from "@apollo/react-hooks";
+import apolloClient from "../helpers/apollo/apolloClient";
 
 export default function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +58,9 @@ export default function MyApp({ Component, pageProps }) {
                   <CartContextProvider>
                     <WishlistContextProvider>
                       <FilterProvider>
-                        <Component {...pageProps} />
+                        <ApolloProvider client={apolloClient}>
+                          <Component {...pageProps} />
+                        </ApolloProvider>
                       </FilterProvider>
                     </WishlistContextProvider>
                   </CartContextProvider>

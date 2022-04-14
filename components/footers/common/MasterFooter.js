@@ -14,6 +14,7 @@ import LogoImage from "../../headers/common/logo";
 import CopyRight from "./copyright";
 
 const MasterFooter = ({
+  data,
   containerFluid,
   logoName,
   layoutClass,
@@ -54,10 +55,9 @@ const MasterFooter = ({
                   <Col lg="6">
                     <div className="subscribe">
                       <div>
-                        <h4>KNOW IT ALL FIRST!</h4>
+                        <h4>{data.subscribeH4}</h4>
                         <p>
-                          Never Miss Anything From Multikart By Signing Up To
-                          Our Newsletter.
+                          {data.subscribeParagraph}
                         </p>
                       </div>
                     </div>
@@ -112,9 +112,7 @@ const MasterFooter = ({
                       <LogoImage logo={logoName} />
                     </div>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam,
+                      {data.footerLogoParagraph}
                     </p>
                     <div className="footer-social">
                       <ul>
@@ -262,7 +260,7 @@ const MasterFooter = ({
                         } else setIsOpen(true);
                       }}
                     >
-                      store information
+                      {data.footerCol3Title}
                       <span class="according-menu"></span>
                     </h4>
                   </div>
@@ -272,15 +270,14 @@ const MasterFooter = ({
                     <div className="footer-contant">
                       <ul className="contact-list">
                         <li>
-                          <i className="fa fa-map-marker"></i>Commerce Essentials Demo
-                          Store
+                          <i className="fa fa-map-marker"></i>{data.footerCol3L1}
                         </li>
                         <li>
-                          <i className="fa fa-phone"></i>Call Us: +44 7975234316
+                          <i className="fa fa-phone"></i>{data.footerCol3L2}
                         </li>
                         <li>
                           <i className="fa fa-envelope-o"></i>Email Us:{" "}
-                          <a href="#">amit_knath@live.com</a>
+                          <a href="#">{data.footerCol3L3}</a>
                         </li>
                       </ul>
                     </div>

@@ -10,7 +10,7 @@ const LogoImage = ({ logo }) => {
         <Fragment>
             <Link href={'/'} >
                 <a>
-                    <img src={`/assets/images/icon/${logo?logo:'logo.png'}`} 
+                    <img src={logo} 
                     alt="" 
                     className="img-fluid"
                     style={mystyle}
