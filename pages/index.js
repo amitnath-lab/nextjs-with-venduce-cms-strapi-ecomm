@@ -14,13 +14,14 @@ import Paragraph from "../components/common/Paragraph";
 import ModalComponent from "../components/common/Modal";
 import Helmet from "react-helmet";
 import MasterFooter from "../components/footers/common/MasterFooter";
-import Query from "../components/common/query"
-import {HOMEPAGE_QUERY} from "../config/queries/graphQL";
+import CMSQuery from "../components/common/query/cms";
+import CommerceQuery from "../components/common/query/commerce";
+import {HOMEPAGE_QUERY, HOMEPAGE_COMMERCE_QUERY} from "../config/queries/graphQL";
 
 const Fashion = () => {
   return (
     <>
-      <Query query={HOMEPAGE_QUERY} >
+      <CMSQuery query={HOMEPAGE_QUERY} >
       {({ data: { homepageFashions } }) => {
         return (
           <>
@@ -40,29 +41,41 @@ const Fashion = () => {
                     inner="title-inner1"
                     hrClass={false}
                   />
-                  <TopCollection
-                    noTitle="null"
-                    backImage={true}
-                    type="fashion"
-                    title="top collection"
-                    subtitle="special offer"
-                    productSlider={Product4}
-                    designClass="section-b-space p-t-0 ratio_asos"
-                    noSlider="false"
-                    cartClass="cart-info cart-wrap"
-                  />
-                  <Parallax />
-                  <SpecialProducts
-                    type="fashion"
-                    backImage={true}
-                    productSlider={Product4}
-                    line={true}
-                    title="title1 section-t-space"
-                    inner="title-inner1"
-                    designClass="section-b-space p-t-0 ratio_asos"
-                    noSlider="true"
-                    cartClass="cart-info cart-wrap"
-                  />
+                  <CommerceQuery query={HOMEPAGE_COMMERCE_QUERY} >
+                  {({ data: { products : {items} } }) => {
+                    return (
+                      <>
+                        <ul>
+                          {items.map((item) =><li>{item.name}</li>)}
+                        </ul>
+                        
+                        <TopCollection
+                          noTitle="null"
+                          backImage={true}
+                          type="fashion"
+                          title="top collection"
+                          subtitle="special offer"
+                          productSlider={Product4}
+                          designClass="section-b-space p-t-0 ratio_asos"
+                          noSlider="false"
+                          cartClass="cart-info cart-wrap"
+                        />
+                        <Parallax />
+                        <SpecialProducts
+                          type="fashion"
+                          backImage={true}
+                          productSlider={Product4}
+                          line={true}
+                          title="title1 section-t-space"
+                          inner="title-inner1"
+                          designClass="section-b-space p-t-0 ratio_asos"
+                          noSlider="true"
+                          cartClass="cart-info cart-wrap"
+                        />
+                      </>
+                    );
+                  }}
+                  </CommerceQuery>
                   <ServiceLayout sectionClass="border-section small-section" />
                   <Blog type="fashion" title="title1" inner="title-inner1" />
                   <Instagram type="fashion" />
@@ -84,7 +97,7 @@ const Fashion = () => {
           </>
         );
       }}
-      </Query>
+      </CMSQuery>
     </>
   );
 };

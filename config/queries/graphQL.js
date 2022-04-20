@@ -30,3 +30,13 @@ export const HOMEPAGE_QUERY = gql`query {
       }
     }
   }`;
+
+  export const HOMEPAGE_COMMERCE_QUERY = gql`query products {
+    products(options :{sort: {createdAt: ASC}} ) {
+      items {
+        id
+        name
+        slug
+      }
+    }
+  }`;
