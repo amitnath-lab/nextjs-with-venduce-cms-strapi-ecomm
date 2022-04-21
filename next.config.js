@@ -5,7 +5,9 @@ const nextConfig = {
   env: {
     API_URL: "https://multikart-graphql-dun.vercel.app/server.js",
     STRAPI_URL: "http://localhost:1337",
-    VENDURE_URL: "http://localhost:3100"
+    VENDURE_URL: "http://localhost:3100",
+    //MEDIA_URL_PREFIX: "/api/media"
+    MEDIA_URL_PREFIX: "/assets"
   },
 
   // if you want to run with local graphQl un-comment below one and comment the above code

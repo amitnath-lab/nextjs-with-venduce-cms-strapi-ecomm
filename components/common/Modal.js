@@ -10,7 +10,7 @@ import {
   Button,
 } from "reactstrap";
 
-const ModalComponent = ({data}) => {
+const ModalComponent = ({data, mediaURLPrefix}) => {
   const [modal, setModal] = useState(true);
 
   const toggle = () => setModal(!modal);
@@ -38,7 +38,7 @@ const ModalComponent = ({data}) => {
                 </Button>
                 <div className="offer-content">
                   <Media
-                    src={data.offerBanner}
+                    src={mediaURLPrefix + data.offerBanner}
                     className="img-fluid blur-up lazyload"
                     alt=""
                   />

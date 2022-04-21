@@ -14,92 +14,83 @@ import Paragraph from "../components/common/Paragraph";
 import ModalComponent from "../components/common/Modal";
 import Helmet from "react-helmet";
 import MasterFooter from "../components/footers/common/MasterFooter";
-import CMSQuery from "../components/common/query/cms";
-import CommerceQuery from "../components/common/query/commerce";
-import {HOMEPAGE_QUERY, HOMEPAGE_COMMERCE_QUERY} from "../config/queries/graphQL";
+import {getCMSPageData,} from "../helpers/apollo/cms";
+import {getPageDataFromCommerce,} from "../helpers/apollo/commerce";
 
-const Fashion = () => {
+const Fashion = ({cmsData, commerceData}) => {
   return (
     <>
-      <CMSQuery query={HOMEPAGE_QUERY} >
-      {({ data: { homepageFashions } }) => {
+      {cmsData.homepageFashions.data.map((homepage) => {
         return (
           <>
-            {homepageFashions.data.map((homepage) => {
-              return (
-                <>
-                  <Helmet>
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <link rel="icon" type="image/x-icon" href={homepage.attributes.HelmetWrapper.favicon} />
-                  </Helmet>
-                  <ModalComponent data={homepage.attributes.ModalComponent} />
-                  <HeaderOne logoName={homepage.attributes.logo} topClass="top-header" />
-                  <Banner />
-                  <CollectionBanner />
-                  <Paragraph
-                    title="title1 section-t-space"
-                    inner="title-inner1"
-                    hrClass={false}
-                  />
-                  <CommerceQuery query={HOMEPAGE_COMMERCE_QUERY} >
-                  {({ data: { products : {items} } }) => {
-                    return (
-                      <>
-                        <ul>
-                          {items.map((item) =><li>{item.name}</li>)}
-                        </ul>
-                        
-                        <TopCollection
-                          noTitle="null"
-                          backImage={true}
-                          type="fashion"
-                          title="top collection"
-                          subtitle="special offer"
-                          productSlider={Product4}
-                          designClass="section-b-space p-t-0 ratio_asos"
-                          noSlider="false"
-                          cartClass="cart-info cart-wrap"
-                        />
-                        <Parallax />
-                        <SpecialProducts
-                          type="fashion"
-                          backImage={true}
-                          productSlider={Product4}
-                          line={true}
-                          title="title1 section-t-space"
-                          inner="title-inner1"
-                          designClass="section-b-space p-t-0 ratio_asos"
-                          noSlider="true"
-                          cartClass="cart-info cart-wrap"
-                        />
-                      </>
-                    );
-                  }}
-                  </CommerceQuery>
-                  <ServiceLayout sectionClass="border-section small-section" />
-                  <Blog type="fashion" title="title1" inner="title-inner1" />
-                  <Instagram type="fashion" />
-                  <div className="section-b-space">
-                    <LogoBlock />
-                  </div>
-                  <MasterFooter
-                    data={homepage.attributes.MasterFooter}
-                    footerClass={`footer-light`}
-                    footerLayOut={"light-layout upper-footer"}
-                    footerSection={"small-section border-section border-top-0"}
-                    belowSection={"section-b-space light-layout"}
-                    newLatter={true}
-                    logoName={"ca_logo.jpg"}
-                  />
-                </>
-              );
-            })};
+            <Helmet>
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="icon" type="image/x-icon" href={process.env.MEDIA_URL_PREFIX + homepage.attributes.HelmetWrapper.favicon} />
+            </Helmet>
+            <ModalComponent data={homepage.attributes.ModalComponent} mediaURLPrefix={process.env.MEDIA_URL_PREFIX} />
+            <HeaderOne logoName={process.env.MEDIA_URL_PREFIX + homepage.attributes.logo} topClass="top-header" />
+            <Banner />
+            <CollectionBanner />
+            <Paragraph
+              title="title1 section-t-space"
+              inner="title-inner1"
+              hrClass={false}
+            />
+            <ul>
+              {commerceData.products.items.map((item) =><li>{item.name}</li>)}
+            </ul>
+            
+{/*             <TopCollection
+              noTitle="null"
+              backImage={true}
+              type="fashion"
+              title="top collection"
+              subtitle="special offer"
+              productSlider={Product4}
+              designClass="section-b-space p-t-0 ratio_asos"
+              noSlider="false"
+              cartClass="cart-info cart-wrap"
+            /> 
+            <Parallax />
+            <SpecialProducts
+              type="fashion"
+              backImage={true}
+              productSlider={Product4}
+              line={true}
+              title="title1 section-t-space"
+              inner="title-inner1"
+              designClass="section-b-space p-t-0 ratio_asos"
+              noSlider="true"
+              cartClass="cart-info cart-wrap"
+            />*/}
+            <ServiceLayout sectionClass="border-section small-section" />
+            {/* <Blog type="fashion" title="title1" inner="title-inner1" /> 
+            <Instagram type="fashion" />*/}
+            <div className="section-b-space">
+              <LogoBlock />
+            </div>
+            <MasterFooter
+              data={homepage.attributes.MasterFooter}
+              footerClass={`footer-light`}
+              footerLayOut={"light-layout upper-footer"}
+              footerSection={"small-section border-section border-top-0"}
+              belowSection={"section-b-space light-layout"}
+              newLatter={true}
+              logoName={"ca_logo.jpg"}
+            />
           </>
         );
-      }}
-      </CMSQuery>
+      })};
     </>
   );
 };
+
+export async function getStaticProps({ preview = null }) {
+  const cmsData = await getCMSPageData("user1-homepage")
+  const commerceData = await getPageDataFromCommerce()
+  return {
+    props: { cmsData, commerceData },
+  }
+}
 
 export default Fashion;

@@ -1,6 +1,5 @@
-import gql from "graphql-tag";
-export const HOMEPAGE_QUERY = gql`query {
-    homepageFashions(filters: {slug : {eq : "user1-homepage"} }) {
+export const HOMEPAGE_CMS_QUERY = `query ($filters: HomepageFashionFiltersInput) {
+    homepageFashions(filters: $filters) {
       data {
         attributes {
           slug
@@ -31,7 +30,7 @@ export const HOMEPAGE_QUERY = gql`query {
     }
   }`;
 
-  export const HOMEPAGE_COMMERCE_QUERY = gql`query products {
+  export const HOMEPAGE_COMMERCE_QUERY = `query products {
     products(options :{sort: {createdAt: ASC}} ) {
       items {
         id
