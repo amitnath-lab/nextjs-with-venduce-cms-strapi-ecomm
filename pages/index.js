@@ -14,8 +14,8 @@ import Paragraph from "../components/common/Paragraph";
 import ModalComponent from "../components/common/Modal";
 import Helmet from "react-helmet";
 import MasterFooter from "../components/footers/common/MasterFooter";
-import {getCMSPageData,} from "../helpers/apollo/cms";
-import {getPageDataFromCommerce,} from "../helpers/apollo/commerce";
+import {getCMSPageData} from "../helpers/apollo/cms";
+import {getPageDataFromCommerce} from "../helpers/apollo/commerce";
 
 const Fashion = ({cmsData, commerceData}) => {
   return (
@@ -35,12 +35,9 @@ const Fashion = ({cmsData, commerceData}) => {
               title="title1 section-t-space"
               inner="title-inner1"
               hrClass={false}
-            />
-            <ul>
-              {commerceData.products.items.map((item) =><li>{item.name}</li>)}
-            </ul>
-            
-{/*             <TopCollection
+            />            
+             <TopCollection
+              productData={commerceData}
               noTitle="null"
               backImage={true}
               type="fashion"
@@ -51,6 +48,7 @@ const Fashion = ({cmsData, commerceData}) => {
               noSlider="false"
               cartClass="cart-info cart-wrap"
             /> 
+            {/*
             <Parallax />
             <SpecialProducts
               type="fashion"
@@ -62,9 +60,9 @@ const Fashion = ({cmsData, commerceData}) => {
               designClass="section-b-space p-t-0 ratio_asos"
               noSlider="true"
               cartClass="cart-info cart-wrap"
-            />*/}
+        /> */}
             <ServiceLayout sectionClass="border-section small-section" />
-            {/* <Blog type="fashion" title="title1" inner="title-inner1" /> 
+            {/*<Blog type="fashion" title="title1" inner="title-inner1" /> 
             <Instagram type="fashion" />*/}
             <div className="section-b-space">
               <LogoBlock />

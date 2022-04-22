@@ -16,6 +16,7 @@ const ProductItem = ({
   productDetail,
   addCompare,
   title,
+  template,
 }) => {
   // eslint-disable-next-line
   const router = useRouter();
@@ -33,6 +34,7 @@ const ProductItem = ({
   const toggleCompare = () => setModalCompare(!modalCompare);
   const toggle = () => setModal(!modal);
   const uniqueTags = [];
+  const defaultImage = '/assets/images/pro3/15.jpg';
 
   const onClickHandle = (img) => {
     setImage(img);
@@ -43,16 +45,18 @@ const ProductItem = ({
   };
 
   const clickProductDetail = () => {
-    const titleProps = product.title.split(" ").join("");
+    const titleProps = product.name.split(" ").join("");
     router.push(`/product-details/${product.id}` + "-" + `${titleProps}`);
   };
 
   const variantChangeByColor = (imgId, product_images) => {
-    product_images.map((data) => {
-      if (data.image_id == imgId) {
-        setImage(data.src);
-      }
-    });
+    if(imgId) {
+      product_images.map((data) => {
+        if (data.id == imgId) {
+          setImage(data.source);
+        }
+      });
+    }
   };
 
   // let RatingStars = [];
@@ -70,18 +74,18 @@ const ProductItem = ({
         </div>
         <div className="front" onClick={clickProductDetail}>
           <Media
-            src={`${image ? image : product.images[0].src}`}
+            src={`${image ? image : product.featuredAsset.source}`}
             className="img-fluid"
             alt=""
           />
         </div>
         {backImage ? (
-          product.images[1] === "undefined" ? (
+          product.assets === undefined || product.assets[1] === undefined ? (
             "false"
           ) : (
             <div className="back" onClick={clickProductDetail}>
               <Media
-                src={`${image ? image : product.images[1].src}`}
+                src={`${image ? image : product.assets[1].source}`}
                 className="img-fluid m-auto"
                 alt=""
               />
@@ -118,7 +122,7 @@ const ProductItem = ({
                       src={`${
                         product.variants && image
                           ? image
-                          : product.images[0].src
+                          : product.assets === undefined ? defaultImage : product.assets[0].src
                       }`}
                       alt=""
                       className="img-fluid"
@@ -126,7 +130,7 @@ const ProductItem = ({
                     <div className="media-body align-self-center text-center">
                       <h5>
                         <i className="fa fa-check"></i>Item{" "}
-                        <span>{product.title}</span>
+                        <span>{product.name}</span>
                         <span>successfully added to your Compare list</span>
                       </h5>
                       <div className="buttons d-flex justify-content-center">
@@ -147,20 +151,20 @@ const ProductItem = ({
             </ModalBody>
           </Modal>
         </div>
-        {product.images ? (
+        {product.assets ? (
           <ul className="product-thumb-list">
-            {product.images.map((img, i) => (
+            {product.assets.map((img, i) => (
               <li
                 className={`grid_thumb_img ${
-                  img.src === image ? "active" : ""
+                  img.source === image ? "active" : ""
                 }`}
                 key={i}
               >
                 <a href={null} title="Add to Wishlist">
                   <Media
-                    src={`${img.src}`}
+                    src={`${img.source}`}
                     alt="wishlist"
-                    onClick={() => onClickHandle(img.src)}
+                    onClick={() => onClickHandle(img.source)}
                   />
                 </a>
               </li>
@@ -178,6 +182,7 @@ const ProductItem = ({
         title={title}
         des={des}
         variantChangeByColor={variantChangeByColor}
+        template={template}
       />
       <Modal
         isOpen={modal}
@@ -191,7 +196,7 @@ const ProductItem = ({
               <div className="quick-view-img">
                 <Media
                   src={`${
-                    product.variants && image ? image : product.images[0].src
+                    product.variants && image ? image : product.featuredAsset.source
                   }`}
                   alt=""
                   className="img-fluid"
@@ -200,35 +205,35 @@ const ProductItem = ({
             </Col>
             <Col lg="6" className="rtl-text">
               <div className="product-right">
-                <h2> {product.title} </h2>
+                <h2> {product.name} </h2>
                 <h3>
                   {currency.symbol}
-                  {(product.price * currency.value).toFixed(2)}
+                  {(product.variants[0].price / currency.cents).toFixed(2)}
                 </h3>
                 {product.variants ? (
                   <ul className="color-variant">
                     {uniqueTags ? (
                       <ul className="color-variant">
-                        {product.type === "jewellery" ||
-                        product.type === "nursery" ||
-                        product.type === "beauty" ||
-                        product.type === "electronics" ||
-                        product.type === "goggles" ||
-                        product.type === "watch" ||
-                        product.type === "pets" ? (
+                        {template === "jewellery" ||
+                        template === "nursery" ||
+                        template === "beauty" ||
+                        template === "electronics" ||
+                        template === "goggles" ||
+                        template === "watch" ||
+                        template === "pets" ? (
                           ""
                         ) : (
                           <>
                             {uniqueTags.map((vari, i) => {
                               return (
                                 <li
-                                  className={vari.color}
+                                  className={vari.facetValues.find((x) => x.facet.code === 'color')}
                                   key={i}
-                                  title={vari.color}
+                                  title={vari.facetValues.find((x) => x.facet.code === 'color')}
                                   onClick={() =>
                                     variantChangeByColor(
-                                      vari.image_id,
-                                      product.images
+                                      product.featuredAsset.id,
+                                      product.assets
                                     )
                                   }
                                 ></li>

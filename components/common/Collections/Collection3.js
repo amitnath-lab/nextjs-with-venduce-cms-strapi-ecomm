@@ -9,40 +9,8 @@ import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import PostLoader from "../PostLoader";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 
-const GET_PRODUCTS = gql`
-  query products($type: _CategoryType!, $indexFrom: Int!, $limit: Int!) {
-    products(type: $type, indexFrom: $indexFrom, limit: $limit) {
-      items {
-        id
-        title
-        description
-        type
-        brand
-        category
-        price
-        new
-        stock
-        sale
-        discount
-        variants {
-          id
-          sku
-          size
-          color
-          image_id
-        }
-        images {
-          image_id
-          id
-          alt
-          src
-        }
-      }
-    }
-  }
-`;
-
 const TopCollection = ({
+  productData,
   type,
   title,
   subtitle,
@@ -54,7 +22,7 @@ const TopCollection = ({
   noTitle,
   innerClass,
   inner,
-  backImage,
+  backImage
 }) => {
   const context = useContext(CartContext);
   const contextWishlist = useContext(WishlistContext);
@@ -62,16 +30,8 @@ const TopCollection = ({
   const quantity = context.quantity;
   const [delayProduct, setDelayProduct] = useState(true);
 
-  var { loading, data } = useQuery(GET_PRODUCTS, {
-    variables: {
-      type: type,
-      indexFrom: 0,
-      limit: 8,
-    },
-  });
-
   useEffect(() => {
-    if (data === undefined) {
+    if (productData === undefined) {
       noSlider === false;
     } else {
       noSlider === true;
@@ -118,8 +78,8 @@ const TopCollection = ({
                   </div>
                 ) : (
                   <Slider {...productSlider} className="product-m no-arrow">
-                    {data &&
-                      data.products.items.map((product, i) => (
+                    {productData &&
+                      productData.products.items.map((product, i) => (
                         <div key={i}>
                           <ProductItems
                             product={product}
@@ -131,6 +91,7 @@ const TopCollection = ({
                             addCompare={() => comapreList.addToCompare(product)}
                             cartClass={cartClass}
                             backImage={backImage}
+                            template={type}
                           />
                         </div>
                       ))}

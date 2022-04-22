@@ -22,5 +22,11 @@ async function fetchAPI(query, { variables } = {}) {
 }
 
 export async function getPageDataFromCommerce(page) {
-  return await fetchAPI(HOMEPAGE_COMMERCE_QUERY)
+  return await fetchAPI(HOMEPAGE_COMMERCE_QUERY,
+    {
+      variables: {
+        limit: 8
+      }
+    }
+  )
 }

@@ -30,12 +30,30 @@ export const HOMEPAGE_CMS_QUERY = `query ($filters: HomepageFashionFiltersInput)
     }
   }`;
 
-  export const HOMEPAGE_COMMERCE_QUERY = `query products {
-    products(options :{sort: {createdAt: ASC}} ) {
+  export const HOMEPAGE_COMMERCE_QUERY = `query products($limit: Int){
+    products(options :{take: $limit} ) {
       items {
         id
         name
-        slug
+        description
+        facetValues {
+          code
+          facet {
+            code
+          }
+        }
+        variants {
+          id
+          sku
+          price
+          stockLevel
+          featuredAsset {
+            source
+          }
+        }
+        featuredAsset {
+          source
+        }
       }
     }
   }`;

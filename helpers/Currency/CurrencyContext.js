@@ -7,6 +7,7 @@ export const Provider = (props) => {
     currency: "USD",
     symbol: "$",
     value: 1,
+    cents: 100
   });
 
   const currencyContext = {
